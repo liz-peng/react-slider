@@ -4,3 +4,10 @@ export const selectedYearRange = (range) => {
     payload: range
   };
 };
+
+export const setBoundaryOfYear = (boundary) => {
+  return {
+    type: 'BOUNDARY_OF_YEAR',
+    payload: boundary
+  };
+};
