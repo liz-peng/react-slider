@@ -9,10 +9,9 @@ const selectedYearRangeReducer = (yearRange = [0, 0], action) => {
 
 const setBoundaryOfYearReducer = (boundary = {}, action) => {
   if(action.type === 'BOUNDARY_OF_YEAR') {
-    console.log('reducer');
-    console.log(action.payload);
     return action.payload;
   }
+  //default
   return {
     lowerBound: 1900,
     upperBound: 2100
