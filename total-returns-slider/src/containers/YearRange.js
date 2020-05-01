@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
-import './YearRange.css';
+import '../YearRange.css';
 import Slider, { Range } from 'rc-slider';
 import 'rc-slider/assets/index.css';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { selectedYearRange } from '../actions';
 
 class YearRange extends Component {
-  
   constructor(props){
     super(props);
     this.constructMarks = this.constructMarks.bind(this);
@@ -24,7 +26,8 @@ class YearRange extends Component {
         minOfRange: minOfRange,
         maxOfRange: maxOfRange,
         step: step,
-        marks: marks
+        marks: marks,
+        selectedYearRange: [minOfRange, maxOfRange],
       };
   }
 
@@ -45,7 +48,10 @@ class YearRange extends Component {
     let marks = this.clearPreviousValueInMarks();
     this.updateMarksBySpot(value[0], marks);
     this.updateMarksBySpot(value[1], marks);
-    this.setState({marks: marks});
+    this.setState({
+      marks: marks,
+      selectedYearRange: value,
+    }, () => this.props.selectedYearRange(value));
   }
 
   clearPreviousValueInMarks(){
@@ -90,4 +96,19 @@ class YearRange extends Component {
   }
 }
 
-export default YearRange;
+const mapStateToProps = (state) => {
+  return {
+    selectedYearRange: state.selectedYearRange
+  };
+}
+
+function mapDispatchToProps(dispatch){
+  return bindActionCreators(
+    {
+      selectedYearRange: selectedYearRange
+    },
+    dispatch
+  );
+}
+
+export default connect(mapStateToProps, { selectedYearRange })(YearRange);
