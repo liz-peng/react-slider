@@ -1,18 +1,19 @@
 import React, {Component} from 'react';
-import Slider, { Range } from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import { connect } from 'react-redux';
 import history from '../data/history.json';
 import { setBoundaryOfYear } from '../actions';
-import { applyMiddleware } from 'redux';
+import { Header, Table, Grid } from 'semantic-ui-react'
 
 class SP500DisplayTable extends Component {
   constructor(props){
     super(props);
+
     this.state = {
       dataToDispay: history,
       yearRange: [0, 1]
     }
+
     this.handleData = this.handleData.bind(this);
   }
 
@@ -33,20 +34,20 @@ class SP500DisplayTable extends Component {
     let max = Number.MIN_SAFE_INTEGER;
     let min = Number.MAX_SAFE_INTEGER;
 
-    history.forEach(row => {
+    this.state.dataToDispay.forEach(row => {
       max = Math.max(max, row['year']);
       min = Math.min(min, row['year']);
+    })
+
+    this.setState({
+      minYearToDisplay: min,
+      maxYearToDisplay: max
     })
 
     let boundaryOfYear = {
       lowerBound: min,
       upperBound: max
     }
-
-    this.setState({
-      minYearToDisplay: min,
-      maxYearToDisplay: max
-    })
 
     this.props.setBoundaryOfYear(boundaryOfYear);
   }
@@ -57,19 +58,39 @@ class SP500DisplayTable extends Component {
       return row["year"] >= this.props.yearRange[0] && row["year"] <= this.props.yearRange[1];
     });
 
-    return filteredData.reverse().map((row) => {
+    return filteredData.reverse().map((row, i) => {
       cumulative += parseFloat(row["totalReturn"], 2);
       return (
-        <li>{row["year"]}, {row["totalReturn"]}, {cumulative.toFixed(2)}</li>
+        <Table.Body key={i}>
+          <Table.Row>
+            <Table.Cell>
+              <Header as='h4'>
+                <Header.Content>
+                  {row["year"]}
+                  <Header.Subheader>Return: {row["totalReturn"]}</Header.Subheader>
+                </Header.Content>
+              </Header>
+            </Table.Cell>
+            <Table.Cell>{cumulative.toFixed(2)}</Table.Cell>
+          </Table.Row>
+        </Table.Body>
       );
     }, this).reverse();
   }
 
   render() {
     return(
-      <ul>
-        {this.renderList()}
-      </ul>
+      <div className="ui grid centered">
+        <Table basic='very' celled collapsing>
+          <Table.Header>
+            <Table.Row>
+              <Table.HeaderCell>Year</Table.HeaderCell>
+              <Table.HeaderCell>Cumulative Return</Table.HeaderCell>
+            </Table.Row>
+          </Table.Header>
+          {this.renderList()}
+        </Table>
+      </div>
     )
   }
 }

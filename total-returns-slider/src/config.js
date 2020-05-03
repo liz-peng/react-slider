@@ -1,0 +1,2 @@
+export const SELECT_YEAR_RANGE = 'SELECT_YEAR_RANGE';
+export const BOUNDARY_OF_YEAR = 'BOUNDARY_OF_YEAR';

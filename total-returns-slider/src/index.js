@@ -6,6 +6,7 @@ import './index.css';
 import App from './components/App';
 import * as serviceWorker from './serviceWorker';
 import reducers from './reducers';
+import 'semantic-ui-css/semantic.min.css'
 
 ReactDOM.render(
   <Provider store={createStore(reducers)}>
