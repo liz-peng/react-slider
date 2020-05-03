@@ -9,7 +9,7 @@ cd total-returns-slider
 npm start
 ```
 
-## Library & framework details
+## Documentation
 
 React 16.13.1
 
