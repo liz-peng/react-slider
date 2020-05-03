@@ -1,4 +1,4 @@
-# Total-Returns-Slider
+## A React single page application using the Slider UI component 
 
 <img src="https://imgur.com/3N7bE2X.gif" width="80%" height="80%" />
 
