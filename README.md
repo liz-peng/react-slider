@@ -1,6 +1,6 @@
 # Total-Returns-Slider
 
-<img src="https://imgur.com/qtuQeQe.png" width="80%" height="80%" />
+<img src="https://imgur.com/3N7bE2X.gif" width="80%" height="80%" />
 
 ## Run the app
 
