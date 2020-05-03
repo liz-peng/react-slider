@@ -15,8 +15,8 @@ React 16.13.1
 
 Redux 4.0.5
 
+Data: S&P 500 historical returns in JSON format https://www.slickcharts.com/sp500/returns
+
 Semantic UI https://react.semantic-ui.com/
 
-Data comes from https://www.slickcharts.com/sp500/returns
-
-Slider component comes from https://github.com/react-component/slider
+Slider UI component https://github.com/react-component/slider
